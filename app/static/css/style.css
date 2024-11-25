@@ -92,7 +92,7 @@ nav a:hover {
 
 /* Container */
 .container {
-    max-width: 1400px;  /* Increased from 1200px */
+    max-width: 1600px;  /* Increased from 1200px */
     margin: 2rem auto;
     padding: 0 1.5rem;
 }
@@ -230,6 +230,11 @@ table a.view-job {
 .flash.error {
     background: #ffebee;
     color: #c62828;
+}
+
+.flash.success {
+    background: var(--success);
+    color: white;
 }
 
 /* Responsive design */
@@ -504,4 +509,172 @@ td:last-child {
 .work-type-label select {
     background-color: var(--gray-light);
     border-color: var(--gray);
+}
+
+/* Import/Export buttons */
+.actions-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn-secondary {
+    background: var(--gray-light);
+    color: var(--primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.import-form {
+    display: inline;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Header row with actions */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.actions-bar {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    width: 145px; /* Slightly increased width */
+    height: 38px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    color: white;
+    background: var(--primary);
+    border: none;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Keep text and icon aligned */
+.btn-action i {
+    font-size: 1.1rem;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.btn-action.export {
+    background-color: var(--success);
+    color: white;
+}
+
+.btn-action.import {
+    background-color: var(--accent);
+    color: white;
+}
+
+.btn-action:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+    filter: brightness(110%);
+}
+
+.import-form {
+    margin: 0;
+}
+
+/* Page title adjustments */
+.page-title {
+    margin: 0;
+}
+
+/* Header layout */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.actions-box {
+    display: flex;
+    gap: 0.75rem;
+    background: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.actions-bar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    width: 130px; /* Fixed width */
+    height: 38px; /* Fixed height */
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    color: white;
+    background: var(--primary);
+    border: none;
+}
+
+.btn-action i {
+    font-size: 1rem;
+}
+
+.btn-action:hover {
+    transform: translateY(-1px);
+    background: var(--accent);
+}
+
+.import-form {
+    margin: 0;
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Ensure label behaves exactly like anchor */
+label.btn-action {
+    margin: 0;
+    line-height: normal;
+}
+
+/* Remove old styles */
+.btn-action.export,
+.btn-action.import {
+    background-color: var(--primary);
 }

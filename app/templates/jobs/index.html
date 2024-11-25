@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 {% block title %}My Jobs{% endblock %}
 {% block content %}
-<h1 class="page-title">My Job Applications:</h1>
+<div class="header-row">
+    <h1 class="page-title">My Job Applications:</h1>
+    <div class="actions-box">
+        <a href="{{ url_for('jobs.export_jobs') }}" class="btn-action">
+            <i class="fas fa-download"></i> Export CSV
+        </a>
+        <input type="file" name="file" accept=".csv" id="import-file" class="hidden">
+        <label for="import-file" class="btn-action">
+            <i class="fas fa-upload"></i> Import CSV
+        </label>
+    </div>
+</div>
 
 {% if is_new_user %}
 <div class="welcome-card">
@@ -10,6 +21,7 @@
     <a href="{{ url_for('jobs.new_job') }}" class="btn-primary">Add Your First Job</a>
 </div>
 {% else %}
+
 <table>
     <tr>
         <th>Company</th>
@@ -90,6 +102,28 @@ document.querySelectorAll('.status-select').forEach(select => {
             console.error('Error updating status:', error);
         }
     });
+});
+
+document.getElementById('import-file').addEventListener('change', async function(e) {
+    if (this.files.length > 0) {
+        const formData = new FormData();
+        formData.append('file', this.files[0]);
+
+        try {
+            const response = await fetch("{{ url_for('jobs.import_jobs') }}", {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                console.error('Import failed');
+            }
+        } catch (error) {
+            console.error('Error importing file:', error);
+        }
+    }
 });
 </script>
 {% endblock %}
