@@ -9,7 +9,8 @@ bp = Blueprint('jobs', __name__)
 @login_required
 def index():
     jobs = Job.query.filter_by(user_id=current_user.id).all()
-    return render_template('jobs/index.html', jobs=jobs)
+    is_new_user = len(jobs) == 0
+    return render_template('jobs/index.html', jobs=jobs, is_new_user=is_new_user)
 
 @bp.route('/job/new', methods=['GET', 'POST'])
 @login_required

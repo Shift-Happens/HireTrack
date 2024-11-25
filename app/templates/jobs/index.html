@@ -2,6 +2,14 @@
 {% block title %}My Jobs{% endblock %}
 {% block content %}
 <h1 class="page-title">My Job Applications:</h1>
+
+{% if is_new_user %}
+<div class="welcome-card">
+    <h2>Welcome to HireTrack!</h2>
+    <p>Get started by clicking the "Add Job" button to track your first job application.</p>
+    <a href="{{ url_for('jobs.new_job') }}" class="btn-primary">Add Your First Job</a>
+</div>
+{% else %}
 <table>
     <tr>
         <th>Company</th>
@@ -45,6 +53,7 @@
     </tr>
     {% endfor %}
 </table>
+{% endif %}
 
 <script>
 document.querySelectorAll('.status-select').forEach(select => {
