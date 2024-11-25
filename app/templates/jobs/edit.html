@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Edit Job{% endblock %}
+{% block content %}
+<form method="post">
+    <label>Company: <input type="text" name="company" value="{{ job.company }}" required></label>
+    <label>Position: <input type="text" name="position" value="{{ job.position }}" required></label>
+    <label>Salary Range:</label>
+    <div class="salary-range">
+        <input type="number" name="salary_min" placeholder="Min" min="0" value="{{ job.salary_min or '' }}">
+        <span>-</span>
+        <input type="number" name="salary_max" placeholder="Max" min="0" value="{{ job.salary_max or '' }}">
+    </div>
+    <label>Job Link: <input type="url" name="job_link" placeholder="https://..." value="{{ job.job_link or '' }}"></label>
+    <label>Status: 
+        <select name="status">
+            <option value="Applied" {% if job.status == 'Applied' %}selected{% endif %}>Applied</option>
+            <option value="Interview" {% if job.status == 'Interview' %}selected{% endif %}>Interview</option>
+            <option value="Offered" {% if job.status == 'Offered' %}selected{% endif %}>Offered</option>
+            <option value="Rejected" {% if job.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+    </label>
+    <label>Notes: <textarea name="notes">{{ job.notes or '' }}</textarea></label>
+    <button type="submit">Save Changes</button>
+</form>
+{% endblock %}

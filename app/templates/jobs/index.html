@@ -10,6 +10,7 @@
         <th>Applied Date</th>
         <th>Links</th>
         <th>Status</th>
+        <th>Actions</th>
     </tr>
     {% for job in jobs %}
     <tr>
@@ -27,6 +28,9 @@
             {% endif %}
         </td>
         <td class="status-{{ job.status.lower() }}">{{ job.status }}</td>
+        <td>
+            <a href="{{ url_for('jobs.edit_job', id=job.id) }}" class="btn-edit">Edit</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

@@ -29,3 +29,25 @@ def new_job():
         db.session.commit()
         return redirect(url_for('jobs.index'))
     return render_template('jobs/new.html')
+
+@bp.route('/job/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_job(id):
+    job = Job.query.get_or_404(id)
+    # Ensure user can only edit their own jobs
+    if job.user_id != current_user.id:
+        return redirect(url_for('jobs.index'))
+        
+    if request.method == 'POST':
+        job.company = request.form['company']
+        job.position = request.form['position']
+        job.salary_min = request.form.get('salary_min')
+        job.salary_max = request.form.get('salary_max')
+        job.job_link = request.form.get('job_link')
+        job.status = request.form['status']
+        job.notes = request.form['notes']
+        
+        db.session.commit()
+        return redirect(url_for('jobs.index'))
+        
+    return render_template('jobs/edit.html', job=job)

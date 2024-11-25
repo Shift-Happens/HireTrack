@@ -188,3 +188,24 @@ table a:hover {
     background: #2c3e50;
     color: white;
 }
+
+/* Edit button */
+.btn-edit {
+    background: #2c3e50;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn-edit:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* Center action buttons */
+td:last-child {
+    text-align: center;
+}
