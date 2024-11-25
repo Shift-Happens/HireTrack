@@ -14,6 +14,8 @@
     <tr>
         <th>Company</th>
         <th>Position</th>
+        <th>Location</th>
+        <th>Work Type</th>
         <th>Salary Range</th>
         <th>Applied Date</th>
         <th>Links</th>
@@ -25,6 +27,8 @@
     <tr>
         <td>{{ job.company }}</td>
         <td>{{ job.position }}</td>
+        <td class="location-cell" title="{{ job.location }}">{{ job.location }}</td>
+        <td><span class="work-type work-type-{{ job.work_type.lower() }}">{{ job.work_type }}</span></td>
         <td>
             {% if job.salary_min or job.salary_max %}
                 ${{ job.salary_min or '?' }} - ${{ job.salary_max or '?' }}
@@ -33,7 +37,7 @@
         <td>{{ job.applied_date.strftime('%Y-%m-%d') }}</td>
         <td>
             {% if job.job_link %}
-                <a href="{{ job.job_link }}" target="_blank">View Job</a>
+                <a href="{{ job.job_link }}" target="_blank" class="view-job">View Job</a>
             {% endif %}
         </td>
         <td class="notes-cell" title="{{ job.notes or '' }}">

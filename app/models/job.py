@@ -5,6 +5,8 @@ class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     company = db.Column(db.String(100), nullable=False)
     position = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(100))
+    work_type = db.Column(db.String(20), default='Hybrid')  # Office, Hybrid, Remote
     salary_min = db.Column(db.Integer)
     salary_max = db.Column(db.Integer)
     job_link = db.Column(db.String(500))

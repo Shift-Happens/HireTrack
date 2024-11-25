@@ -4,6 +4,16 @@
 <form method="post">
     <label>Company: <input type="text" name="company" required></label>
     <label>Position: <input type="text" name="position" required></label>
+    <div class="location-group">
+        <label>Location: <input type="text" name="location" placeholder="City, Country" required></label>
+        <label class="work-type-label">Work Type: 
+            <select name="work_type">
+                <option value="Office">Office</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Remote">Remote</option>
+            </select>
+        </label>
+    </div>
     <label>Salary Range:</label>
     <div class="salary-range">
         <input type="number" name="salary_min" placeholder="Min" min="0">

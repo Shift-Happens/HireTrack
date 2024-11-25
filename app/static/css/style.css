@@ -92,9 +92,9 @@ nav a:hover {
 
 /* Container */
 .container {
-    max-width: 1200px;
+    max-width: 1400px;  /* Increased from 1200px */
     margin: 2rem auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
 }
 
 /* Forms */
@@ -156,12 +156,14 @@ table {
     border-spacing: 0;
     margin: 2rem 0;
     overflow: hidden;
+    min-width: 1200px;  /* Ensure minimum width */
 }
 
 th, td {
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid var(--gray);
+    vertical-align: middle;  /* Center content vertically */
 }
 
 th {
@@ -176,6 +178,44 @@ th {
 
 tr:hover td {
     background: var(--gray-light);
+}
+
+/* Column specific widths */
+tr > :nth-child(1) { width: 12%; }  /* Company */
+tr > :nth-child(2) { width: 15%; }  /* Position */
+tr > :nth-child(3) { width: 12%; }  /* Location */
+tr > :nth-child(4) { width: 8%; }   /* Work Type */
+tr > :nth-child(5) { width: 12%; }  /* Salary */
+tr > :nth-child(6) { width: 10%; }  /* Date */
+tr > :nth-child(7) { width: 8%; }   /* Links */
+tr > :nth-child(8) { width: 12%; }  /* Notes */
+tr > :nth-child(9) { width: 8%; }   /* Status */
+tr > :nth-child(10) { width: 3%; }  /* Actions */
+
+/* Location cell styling */
+.location-cell {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* View Job button styling */
+table a.view-job {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    white-space: nowrap;
+    text-align: center;
+    min-width: 90px;
+}
+
+/* Status select adjustments */
+.status-select {
+    min-width: 100px;
+    max-width: 120px;
+    padding: 0.4rem;
+    margin: 0 auto;
+    display: block;
 }
 
 /* Flash messages */
@@ -416,4 +456,42 @@ td:last-child {
     background: var(--primary);
     transform: translateY(-1px);
     box-shadow: var(--shadow);
+}
+
+/* Location group styling */
+.location-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Work type badges */
+.work-type {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.work-type-office {
+    background-color: var(--gray-light);
+    color: var(--primary);
+}
+
+.work-type-hybrid {
+    background-color: #9b59b6;
+    color: white;
+}
+
+.work-type-remote {
+    background-color: #27ae60;
+    color: white;
+}
+
+/* Work type select styling */
+.work-type-label select {
+    background-color: var(--gray-light);
+    border-color: var(--gray);
 }

@@ -4,6 +4,16 @@
 <form method="post">
     <label>Company: <input type="text" name="company" value="{{ job.company }}" required></label>
     <label>Position: <input type="text" name="position" value="{{ job.position }}" required></label>
+    <div class="location-group">
+        <label>Location: <input type="text" name="location" value="{{ job.location }}" placeholder="City, Country" required></label>
+        <label class="work-type-label">Work Type: 
+            <select name="work_type">
+                <option value="Office" {% if job.work_type == 'Office' %}selected{% endif %}>Office</option>
+                <option value="Hybrid" {% if job.work_type == 'Hybrid' %}selected{% endif %}>Hybrid</option>
+                <option value="Remote" {% if job.work_type == 'Remote' %}selected{% endif %}>Remote</option>
+            </select>
+        </label>
+    </div>
     <label>Salary Range:</label>
     <div class="salary-range">
         <input type="number" name="salary_min" placeholder="Min" min="0" value="{{ job.salary_min or '' }}">

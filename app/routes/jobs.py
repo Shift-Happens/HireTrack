@@ -19,6 +19,8 @@ def new_job():
         job = Job(
             company=request.form['company'],
             position=request.form['position'],
+            location=request.form['location'],
+            work_type=request.form['work_type'],
             salary_min=request.form.get('salary_min'),
             salary_max=request.form.get('salary_max'),
             job_link=request.form.get('job_link'),
@@ -42,6 +44,8 @@ def edit_job(id):
     if request.method == 'POST':
         job.company = request.form['company']
         job.position = request.form['position']
+        job.location = request.form['location']
+        job.work_type = request.form['work_type']
         job.salary_min = request.form.get('salary_min')
         job.salary_max = request.form.get('salary_max')
         job.job_link = request.form.get('job_link')
