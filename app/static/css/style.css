@@ -281,14 +281,24 @@ td.status-rejected {
 
 /* Salary range inputs */
 .salary-range {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr;
     gap: 0.5rem;
+    align-items: center;
     margin-bottom: 1rem;
 }
 
+.currency-select {
+    width: 70px;
+    padding: 0.75rem 0.5rem;
+}
+
 .salary-range input {
-    width: calc(50% - 0.5rem);
+    width: 100%;
+}
+
+.salary-range span {
+    text-align: center;
 }
 
 /* Links */

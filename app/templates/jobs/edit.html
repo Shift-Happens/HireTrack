@@ -16,6 +16,14 @@
     </div>
     <label>Salary Range:</label>
     <div class="salary-range">
+        <select name="salary_currency" class="currency-select">
+            <option value="USD" {% if job.salary_currency == 'USD' %}selected{% endif %}>$</option>
+            <option value="EUR" {% if job.salary_currency == 'EUR' %}selected{% endif %}>€</option>
+            <option value="GBP" {% if job.salary_currency == 'GBP' %}selected{% endif %}>£</option>
+            <option value="PLN" {% if job.salary_currency == 'PLN' %}selected{% endif %}>zł</option>
+            <option value="CAD" {% if job.salary_currency == 'CAD' %}selected{% endif %}>C$</option>
+            <option value="AUD" {% if job.salary_currency == 'AUD' %}selected{% endif %}>A$</option>
+        </select>
         <input type="number" name="salary_min" placeholder="Min" min="0" value="{{ job.salary_min or '' }}">
         <span>-</span>
         <input type="number" name="salary_max" placeholder="Max" min="0" value="{{ job.salary_max or '' }}">

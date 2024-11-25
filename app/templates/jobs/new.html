@@ -16,6 +16,14 @@
     </div>
     <label>Salary Range:</label>
     <div class="salary-range">
+        <select name="salary_currency" class="currency-select">
+            <option value="USD">$</option>
+            <option value="EUR">€</option>
+            <option value="GBP">£</option>
+            <option value="PLN">zł</option>
+            <option value="CAD">C$</option>
+            <option value="AUD">A$</option>
+        </select>
         <input type="number" name="salary_min" placeholder="Min" min="0">
         <span>-</span>
         <input type="number" name="salary_max" placeholder="Max" min="0">

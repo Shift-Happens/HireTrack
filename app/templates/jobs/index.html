@@ -31,7 +31,15 @@
         <td><span class="work-type work-type-{{ job.work_type.lower() }}">{{ job.work_type }}</span></td>
         <td>
             {% if job.salary_min or job.salary_max %}
-                ${{ job.salary_min or '?' }} - ${{ job.salary_max or '?' }}
+                {% set symbols = {
+                    'USD': '$',
+                    'EUR': '€',
+                    'GBP': '£',
+                    'PLN': 'zł',
+                    'CAD': 'C$',
+                    'AUD': 'A$'
+                } %}
+                {{ symbols[job.salary_currency] }}{{ job.salary_min or '?' }} - {{ symbols[job.salary_currency] }}{{ job.salary_max or '?' }}
             {% endif %}
         </td>
         <td>{{ job.applied_date.strftime('%Y-%m-%d') }}</td>

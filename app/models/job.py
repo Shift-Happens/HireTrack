@@ -9,6 +9,7 @@ class Job(db.Model):
     work_type = db.Column(db.String(20), default='Hybrid')  # Office, Hybrid, Remote
     salary_min = db.Column(db.Integer)
     salary_max = db.Column(db.Integer)
+    salary_currency = db.Column(db.String(3), default='PLN')
     job_link = db.Column(db.String(500))
     status = db.Column(db.String(20), default='Applied')
     applied_date = db.Column(db.DateTime, default=datetime.utcnow)
