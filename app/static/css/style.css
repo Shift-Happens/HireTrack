@@ -17,17 +17,64 @@ nav {
     background: #2c3e50;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left, .nav-right {
+    flex: 1;
+}
+
+.nav-center {
+    flex: 2;
+    text-align: center;
+}
+
+.nav-right {
+    text-align: right;
+}
+
+.app-title {
+    font-family: 'Russo One', sans-serif;
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin-right: 1.5rem;
+    margin-left: 1.5rem;
     transition: color 0.3s;
+}
+
+.nav-left a {
+    margin-right: 1.5rem;
+    margin-left: 0;
+}
+
+.nav-right a {
+    margin-left: 1.5rem;
+    margin-right: 0;
 }
 
 nav a:hover {
     color: #3498db;
+}
+
+.btn-logout {
+    color: #ff6b6b;
+}
+
+.btn-logout:hover {
+    color: #ff5252;
 }
 
 /* Container */
@@ -275,4 +322,14 @@ td:last-child {
     word-wrap: break-word;
     z-index: 1;
     display: block;
+}
+
+/* Page title styling */
+.page-title {
+    font-family: 'Russo One', sans-serif;
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
