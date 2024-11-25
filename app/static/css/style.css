@@ -209,3 +209,70 @@ table a:hover {
 td:last-child {
     text-align: center;
 }
+
+/* Notes cell */
+.notes-cell {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Status select styling */
+.status-select {
+    width: 100%;
+    padding: 0.25rem;
+    border-radius: 4px;
+    border: none;
+    color: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.status-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+}
+
+/* Style select based on status */
+.status-select.status-applied {
+    background-color: #ffd700;
+    color: #000;
+}
+
+.status-select.status-interview {
+    background-color: #9c27b0;
+    color: #fff;
+}
+
+.status-select.status-offered {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.status-select.status-rejected {
+    background-color: #f44336;
+    color: #fff;
+}
+
+/* Tooltip for full notes */
+.notes-cell {
+    position: relative;
+    cursor: help;
+}
+
+.notes-cell:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: #333;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    max-width: 300px;
+    word-wrap: break-word;
+    z-index: 1;
+    display: block;
+}

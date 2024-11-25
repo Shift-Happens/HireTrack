@@ -9,6 +9,7 @@
         <th>Salary Range</th>
         <th>Applied Date</th>
         <th>Links</th>
+        <th>Notes</th>
         <th>Status</th>
         <th>Actions</th>
     </tr>
@@ -27,11 +28,47 @@
                 <a href="{{ job.job_link }}" target="_blank">View Job</a>
             {% endif %}
         </td>
-        <td class="status-{{ job.status.lower() }}">{{ job.status }}</td>
+        <td class="notes-cell" title="{{ job.notes or '' }}">
+            {{ job.notes[:50] + '...' if job.notes and job.notes|length > 50 else job.notes or '' }}
+        </td>
+        <td>
+            <select class="status-select status-{{ job.status.lower() }}" data-job-id="{{ job.id }}">
+                <option value="Applied" {% if job.status == 'Applied' %}selected{% endif %}>Applied</option>
+                <option value="Interview" {% if job.status == 'Interview' %}selected{% endif %}>Interview</option>
+                <option value="Offered" {% if job.status == 'Offered' %}selected{% endif %}>Offered</option>
+                <option value="Rejected" {% if job.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+            </select>
+        </td>
         <td>
             <a href="{{ url_for('jobs.edit_job', id=job.id) }}" class="btn-edit">Edit</a>
         </td>
     </tr>
     {% endfor %}
 </table>
+
+<script>
+document.querySelectorAll('.status-select').forEach(select => {
+    select.addEventListener('change', async (e) => {
+        const jobId = e.target.dataset.jobId;
+        const newStatus = e.target.value;
+        
+        try {
+            const response = await fetch(`/job/${jobId}/status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: newStatus })
+            });
+            
+            if (response.ok) {
+                // Update the select element's classes
+                e.target.className = `status-select status-${newStatus.toLowerCase()}`;
+            }
+        } catch (error) {
+            console.error('Error updating status:', error);
+        }
+    });
+});
+</script>
 {% endblock %}

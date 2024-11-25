@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify
 from flask_login import login_required, current_user
 from app.models.job import Job
 from app import db
@@ -51,3 +51,15 @@ def edit_job(id):
         return redirect(url_for('jobs.index'))
         
     return render_template('jobs/edit.html', job=job)
+
+@bp.route('/job/<int:id>/status', methods=['POST'])
+@login_required
+def update_status(id):
+    job = Job.query.get_or_404(id)
+    if job.user_id != current_user.id:
+        return jsonify({'error': 'Unauthorized'}), 403
+        
+    data = request.get_json()
+    job.status = data.get('status')
+    db.session.commit()
+    return jsonify({'status': 'success'})
