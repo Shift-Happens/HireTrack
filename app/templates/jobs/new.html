@@ -4,12 +4,19 @@
 <form method="post">
     <label>Company: <input type="text" name="company" required></label>
     <label>Position: <input type="text" name="position" required></label>
+    <label>Salary Range:</label>
+    <div class="salary-range">
+        <input type="number" name="salary_min" placeholder="Min" min="0">
+        <span>-</span>
+        <input type="number" name="salary_max" placeholder="Max" min="0">
+    </div>
+    <label>Job Link: <input type="url" name="job_link" placeholder="https://..."></label>
     <label>Status: 
         <select name="status">
-            <option>Applied</option>
-            <option>Interview</option>
-            <option>Offered</option>
-            <option>Rejected</option>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Offered">Offered</option>
+            <option value="Rejected">Rejected</option>
         </select>
     </label>
     <label>Notes: <textarea name="notes"></textarea></label>

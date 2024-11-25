@@ -6,15 +6,27 @@
     <tr>
         <th>Company</th>
         <th>Position</th>
-        <th>Status</th>
+        <th>Salary Range</th>
         <th>Applied Date</th>
+        <th>Links</th>
+        <th>Status</th>
     </tr>
     {% for job in jobs %}
     <tr>
         <td>{{ job.company }}</td>
         <td>{{ job.position }}</td>
-        <td>{{ job.status }}</td>
+        <td>
+            {% if job.salary_min or job.salary_max %}
+                ${{ job.salary_min or '?' }} - ${{ job.salary_max or '?' }}
+            {% endif %}
+        </td>
         <td>{{ job.applied_date.strftime('%Y-%m-%d') }}</td>
+        <td>
+            {% if job.job_link %}
+                <a href="{{ job.job_link }}" target="_blank">View Job</a>
+            {% endif %}
+        </td>
+        <td class="status-{{ job.status.lower() }}">{{ job.status }}</td>
     </tr>
     {% endfor %}
 </table>

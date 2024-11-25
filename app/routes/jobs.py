@@ -18,6 +18,9 @@ def new_job():
         job = Job(
             company=request.form['company'],
             position=request.form['position'],
+            salary_min=request.form.get('salary_min'),
+            salary_max=request.form.get('salary_max'),
+            job_link=request.form.get('job_link'),
             status=request.form['status'],
             notes=request.form['notes'],
             user_id=current_user.id
