@@ -17,7 +17,7 @@ A modern web application to track and manage your job applications efficiently.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/HireTrack.git
+git clone https://github.com/Shift-Happens/HireTrack.git
 cd HireTrack
 ```
 
