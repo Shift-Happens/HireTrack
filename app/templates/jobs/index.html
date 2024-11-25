@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My Jobs{% endblock %}
+{% block content %}
+<h1>My Job Applications</h1>
+<table>
+    <tr>
+        <th>Company</th>
+        <th>Position</th>
+        <th>Status</th>
+        <th>Applied Date</th>
+    </tr>
+    {% for job in jobs %}
+    <tr>
+        <td>{{ job.company }}</td>
+        <td>{{ job.position }}</td>
+        <td>{{ job.status }}</td>
+        <td>{{ job.applied_date.strftime('%Y-%m-%d') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

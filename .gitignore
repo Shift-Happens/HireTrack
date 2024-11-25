@@ -1,0 +1,42 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and virtual environments
+.env
+.venv
+venv/
+ENV/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+*.log
+
+# IDE and editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sensitive configuration files
+*.ini
+*.yaml
+*.yml
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+
+# Package and distribution files
+dist/
+build/
+*.egg-info/
+
+# Jupyter Notebook temporary files
+.ipynb_checkpoints/
