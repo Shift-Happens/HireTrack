@@ -60,15 +60,19 @@ def logout():
 @bp.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
+    # Clear any existing flash messages when entering settings page
+    # This prevents messages from other pages (like registration or import) 
+    # from showing up in settings
+    session.pop('_flashes', None)  
+    
     if request.method == 'POST':
-        # Update email
         current_user.email = request.form['email']
-        
-        # Update default currency
         current_user.default_currency = request.form['default_currency']
-        
         db.session.commit()
-        flash('Settings updated successfully!', 'success')
+        
+        # Add 'settings' category to this flash message
+        # This ensures only settings-related messages appear on this page
+        flash('Settings updated successfully!', 'settings success')
         return redirect(url_for('auth.settings'))
     
     return render_template('auth/settings.html')

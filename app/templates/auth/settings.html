@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Settings{% endblock %}
 {% block content %}
+<!-- Only show flash messages with 'settings' category -->
+<!-- This filters out messages from other pages like registration or job imports -->
+{% with messages = get_flashed_messages(with_categories=true, category_filter=['settings']) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 <form method="post">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="flash {{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
     <label>Email: <input type="email" name="email" value="{{ current_user.email }}" required></label>
     <label>Default Currency:
         <select name="default_currency">
