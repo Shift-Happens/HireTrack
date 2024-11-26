@@ -56,3 +56,19 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
+
+@bp.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    if request.method == 'POST':
+        # Update email
+        current_user.email = request.form['email']
+        
+        # Update default currency
+        current_user.default_currency = request.form['default_currency']
+        
+        db.session.commit()
+        flash('Settings updated successfully!', 'success')
+        return redirect(url_for('auth.settings'))
+    
+    return render_template('auth/settings.html')

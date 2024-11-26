@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<form method="post">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <label>Email: <input type="email" name="email" value="{{ current_user.email }}" required></label>
+    <label>Default Currency:
+        <select name="default_currency">
+            <option value="USD" {% if current_user.default_currency == 'USD' %}selected{% endif %}>USD</option>
+            <option value="EUR" {% if current_user.default_currency == 'EUR' %}selected{% endif %}>EUR</option>
+            <option value="GBP" {% if current_user.default_currency == 'GBP' %}selected{% endif %}>GBP</option>
+            <option value="PLN" {% if current_user.default_currency == 'PLN' %}selected{% endif %}>PLN</option>
+            <option value="CAD" {% if current_user.default_currency == 'CAD' %}selected{% endif %}>CAD</option>
+            <option value="AUD" {% if current_user.default_currency == 'AUD' %}selected{% endif %}>AUD</option>
+        </select>
+    </label>
+    <button type="submit">Save Settings</button>
+</form>
+{% endblock %}

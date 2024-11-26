@@ -35,7 +35,8 @@ def new_job():
         db.session.add(job)
         db.session.commit()
         return redirect(url_for('jobs.index'))
-    return render_template('jobs/new.html')
+    job = Job()
+    return render_template('jobs/new.html', job=job)
 
 @bp.route('/job/<int:id>/edit', methods=['GET', 'POST'])
 @login_required

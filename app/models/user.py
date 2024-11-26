@@ -8,6 +8,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
     jobs = db.relationship('Job', backref='user', lazy=True)
+    default_currency = db.Column(db.String(3), default='USD')  # Add this line
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

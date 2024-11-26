@@ -21,6 +21,7 @@
         </div>
         <div class="nav-right">
             {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.settings') }}">Settings</a>
                 <a href="{{ url_for('auth.logout') }}" class="btn-logout">Logout</a>
             {% else %}
                 <a href="{{ url_for('auth.login') }}">Login</a>

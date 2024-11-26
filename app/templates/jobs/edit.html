@@ -17,12 +17,12 @@
     <label>Salary Range:</label>
     <div class="salary-range">
         <select name="salary_currency" class="currency-select">
-            <option value="USD" {% if job.salary_currency == 'USD' %}selected{% endif %}>$</option>
-            <option value="EUR" {% if job.salary_currency == 'EUR' %}selected{% endif %}>€</option>
-            <option value="GBP" {% if job.salary_currency == 'GBP' %}selected{% endif %}>£</option>
-            <option value="PLN" {% if job.salary_currency == 'PLN' %}selected{% endif %}>zł</option>
-            <option value="CAD" {% if job.salary_currency == 'CAD' %}selected{% endif %}>C$</option>
-            <option value="AUD" {% if job.salary_currency == 'AUD' %}selected{% endif %}>A$</option>
+            <option value="USD" {% if job.salary_currency == 'USD' or current_user.default_currency == 'USD' %}selected{% endif %}>USD</option>
+            <option value="EUR" {% if job.salary_currency == 'EUR' or current_user.default_currency == 'EUR' %}selected{% endif %}>EUR</option>
+            <option value="GBP" {% if job.salary_currency == 'GBP' or current_user.default_currency == 'GBP' %}selected{% endif %}>GBP</option>
+            <option value="PLN" {% if job.salary_currency == 'PLN' or current_user.default_currency == 'PLN' %}selected{% endif %}>PLN</option>
+            <option value="CAD" {% if job.salary_currency == 'CAD' or current_user.default_currency == 'CAD' %}selected{% endif %}>CAD</option>
+            <option value="AUD" {% if job.salary_currency == 'AUD' or current_user.default_currency == 'AUD' %}selected{% endif %}>AUD</option>
         </select>
         <input type="number" name="salary_min" placeholder="Min" min="0" value="{{ job.salary_min or '' }}">
         <span>-</span>
