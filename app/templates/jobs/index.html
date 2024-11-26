@@ -81,53 +81,63 @@
     </tr>
     {% endfor %}
 </table>
-{% endif %}
-
+{% if not is_new_user %}
 <script>
-document.querySelectorAll('.status-select').forEach(select => {
-    select.addEventListener('change', async (e) => {
-        const jobId = e.target.dataset.jobId;
-        const newStatus = e.target.value;
+document.addEventListener('DOMContentLoaded', function() {
+    const socket = io();
+    const jobsTable = document.querySelector('table tbody');
+    const symbols = {
+        'USD': '$',
+        'EUR': '€',
+        'GBP': '£',
+        'PLN': 'zł',
+        'CAD': 'C$',
+        'AUD': 'A$'
+    };
+
+    socket.on('connect', () => {
+        console.log('Connected to WebSocket');
+    });
+
+    socket.on('new_job', (job) => {
+        console.log('Received new job:', job);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${job.company}</td>
+            <td>${job.position}</td>
+            <td class="contract-cell" title="${job.contract_type}">${job.contract_type.length > 20 ? job.contract_type.slice(0,20) + '...' : job.contract_type}</td>
+            <td class="location-cell" title="${job.location}">${job.location}</td>
+            <td><span class="work-type work-type-${job.work_type.toLowerCase()}">${job.work_type}</span></td>
+            <td>${(job.salary_min || job.salary_max) ? `${symbols[job.salary_currency]}${job.salary_min || '?'} - ${symbols[job.salary_currency]}${job.salary_max || '?'}` : ''}</td>
+            <td>${job.applied_date}</td>
+            <td>${job.job_link ? `<a href="${job.job_link}" target="_blank" class="view-job">View Job</a>` : ''}</td>
+            <td class="notes-cell" title="${job.notes || ''}">${job.notes && job.notes.length > 50 ? job.notes.slice(0,50) + '...' : job.notes || ''}</td>
+            <td>
+                <select class="status-select status-${job.status.toLowerCase()}" data-job-id="${job.id}">
+                    <option value="Applied" ${job.status === 'Applied' ? 'selected' : ''}>Applied</option>
+                    <option value="Interview" ${job.status === 'Interview' ? 'selected' : ''}>Interview</option>
+                    <option value="Offered" ${job.status === 'Offered' ? 'selected' : ''}>Offered</option>
+                    <option value="Rejected" ${job.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                </select>
+            </td>
+            <td><a href="/job/${job.id}/edit" class="btn-edit">Edit</a></td>
+        `;
+        jobsTable.appendChild(tr);
         
-        try {
-            const response = await fetch(`/job/${jobId}/status`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ status: newStatus })
-            });
-            
-            if (response.ok) {
-                // Update the select element's classes
-                e.target.className = `status-select status-${newStatus.toLowerCase()}`;
-            }
-        } catch (error) {
-            console.error('Error updating status:', error);
-        }
+        // Add event listener to new status select
+        const select = tr.querySelector('.status-select');
+        select.addEventListener('change', handleStatusChange);
+    });
+
+    socket.on('error', (error) => {
+        console.error('WebSocket error:', error);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Disconnected from WebSocket');
     });
 });
-
-document.getElementById('import-file').addEventListener('change', async function(e) {
-    if (this.files.length > 0) {
-        const formData = new FormData();
-        formData.append('file', this.files[0]);
-
-        try {
-            const response = await fetch("{{ url_for('jobs.import_jobs') }}", {
-                method: 'POST',
-                body: formData
-            });
-
-            if (response.ok) {
-                window.location.reload();
-            } else {
-                console.error('Import failed');
-            }
-        } catch (error) {
-            console.error('Error importing file:', error);
-        }
-    }
-});
 </script>
+{% endif %}
+{% endif %}
 {% endblock %}
