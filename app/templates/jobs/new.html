@@ -14,6 +14,17 @@
             </select>
         </label>
     </div>
+    <div class="contract-group">
+        <label>Contract Type:
+            <input type="text" list="contract-types" name="contract_type" value="{{ job.contract_type or '' }}" required>
+            <datalist id="contract-types">
+                <option value="UoP">
+                <option value="B2B">
+                <option value="Zlecenie">
+                <option value="Part Time">
+            </datalist>
+        </label>
+    </div>
     <label>Salary Range:</label>
     <div class="salary-range">
         <select name="salary_currency" class="currency-select">

@@ -157,7 +157,7 @@ table {
     border-spacing: 0;
     margin: 2rem 0;
     overflow: hidden;
-    min-width: 1200px;  /* Ensure minimum width */
+    min-width: 1400px;  /* Ensure minimum width */
 }
 
 th, td {
@@ -182,16 +182,17 @@ tr:hover td {
 }
 
 /* Column specific widths */
-tr > :nth-child(1) { width: 12%; }  /* Company */
+tr > :nth-child(1) { width: 14%; }  /* Company */
 tr > :nth-child(2) { width: 15%; }  /* Position */
-tr > :nth-child(3) { width: 12%; }  /* Location */
-tr > :nth-child(4) { width: 8%; }   /* Work Type */
-tr > :nth-child(5) { width: 12%; }  /* Salary */
-tr > :nth-child(6) { width: 10%; }  /* Date */
-tr > :nth-child(7) { width: 8%; }   /* Links */
-tr > :nth-child(8) { width: 12%; }  /* Notes */
-tr > :nth-child(9) { width: 8%; }   /* Status */
-tr > :nth-child(10) { width: 3%; }  /* Actions */
+tr > :nth-child(3) { width: 6%; }  /* Work Type */
+tr > :nth-child(4) { width: 8%; }   /* Location */
+tr > :nth-child(5) { width: 8%; }   /* Contract Type - new */
+tr > :nth-child(6) { width: 14%; }  /* Salary */
+tr > :nth-child(7) { width: 8%; }  /* Date */
+tr > :nth-child(8) { width: 6%; }   /* Links */
+tr > :nth-child(9) { width: 18%; }  /* Notes */
+tr > :nth-child(10) { width: 9%; }  /* Status */
+tr > :nth-child(11) { width: 2%; }  /* Actions */
 
 /* Location cell styling */
 .location-cell {
@@ -373,10 +374,36 @@ td:last-child {
     z-index: 10;
 }
 
+/* Contract cell styling */
+.contract-cell {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    cursor: help;
+}
+
+.contract-cell:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    max-width: 200px;
+    box-shadow: var(--shadow);
+    z-index: 10;
+}
+
 /* Status select styling */
 .status-select {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.4rem;
     border-radius: 6px;
     border: none;
     color: inherit;

@@ -15,3 +15,4 @@ class Job(db.Model):
     applied_date = db.Column(db.DateTime, default=datetime.utcnow)
     notes = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    contract_type = db.Column(db.String(20), default='UoP')

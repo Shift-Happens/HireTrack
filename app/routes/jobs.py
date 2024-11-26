@@ -30,7 +30,8 @@ def new_job():
             status=request.form['status'],
             notes=request.form['notes'],
             user_id=current_user.id,
-            salary_currency=request.form['salary_currency']
+            salary_currency=request.form['salary_currency'],
+            contract_type=request.form['contract_type']
         )
         db.session.add(job)
         db.session.commit()
@@ -57,6 +58,7 @@ def edit_job(id):
         job.status = request.form['status']
         job.notes = request.form['notes']
         job.salary_currency = request.form['salary_currency']
+        job.contract_type = request.form['contract_type']
         
         db.session.commit()
         return redirect(url_for('jobs.index'))
