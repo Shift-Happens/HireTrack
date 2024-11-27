@@ -3,6 +3,15 @@
 {% block content %}
 <div class="container">
     <h1 class="page-title">Report a Bug</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     {% if remaining_reports > 0 %}
     <div class="bug-limit-info {% if remaining_reports < (bug_limit // 4) %}warning{% endif %}">
         Remaining bug reports today: {{ remaining_reports }}/{{ bug_limit }}

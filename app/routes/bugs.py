@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, current_app, redirect, url_for
+from flask import Blueprint, render_template, request, flash, current_app, redirect, url_for, session
 from flask_login import current_user
 import os
 from datetime import datetime, timedelta
@@ -29,15 +29,18 @@ def check_bug_limit(user_id):
 
 @bp.route('/report-bug', methods=['GET', 'POST'])
 def report_bug():
+    if not current_user.is_authenticated:
+        flash('You must be logged in to report bugs.', 'error')
+        return redirect(url_for('auth.login'))
+
+    # Clear existing flash messages only on GET request
+    if request.method == 'GET':
+        session.pop('_flashes', None)
+        
     if request.method == 'POST':
-        if not current_user.is_authenticated:
-            flash('You must be logged in to report bugs.', 'error')
-            return redirect(url_for('auth.login'))
-            
-        # Check bug submission limit
         if not check_bug_limit(current_user.id):
             flash(f'You have exceeded the limit of {BUG_LIMIT} bug reports per day.', 'error')
-            return redirect(url_for('jobs.index'))
+            return redirect(url_for('bugs.report_bug'))
             
         title = request.form['title']
         description = request.form['description']
@@ -75,10 +78,13 @@ def report_bug():
             json.dump(report, f, indent=2, ensure_ascii=False)
             
         flash('Bug report submitted successfully! Thank you for helping improve HireTrack.', 'success')
-        return redirect(url_for('jobs.index'))
-        
-    # Pass both remaining reports and the limit
-    return render_template('bugs/report.html', 
+        # Instead of redirecting, render the template directly
+        return render_template('bugs/report.html',
+            remaining_reports=BUG_LIMIT - bug_counts[current_user.id]['count'],
+            bug_limit=BUG_LIMIT
+        )
+    
+    return render_template('bugs/report.html',
         remaining_reports=BUG_LIMIT - bug_counts[current_user.id]['count'] if current_user.is_authenticated else 0,
         bug_limit=BUG_LIMIT
     )
