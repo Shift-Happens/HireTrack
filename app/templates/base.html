@@ -21,6 +21,9 @@
         </div>
         <div class="nav-right">
             {% if current_user.is_authenticated %}
+                <a href="{{ url_for('bugs.report_bug') }}" class="btn-bug-report">
+                    <i class="fas fa-bug"></i> Report Bug
+                </a>
                 <a href="{{ url_for('auth.settings') }}">Settings</a>
                 <a href="{{ url_for('auth.logout') }}" class="btn-logout">Logout</a>
             {% else %}
