@@ -136,6 +136,38 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on('disconnect', () => {
         console.log('Disconnected from WebSocket');
     });
+
+    function handleStatusChange(e) {
+        const jobId = e.target.dataset.jobId;
+        const newStatus = e.target.value;
+        
+        fetch(`/job/${jobId}/status`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: newStatus })
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove all status-* classes first
+                e.target.classList.forEach(className => {
+                    if (className.startsWith('status-')) {
+                        e.target.classList.remove(className);
+                    }
+                });
+                // Add new status class
+                e.target.classList.add('status-select');
+                e.target.classList.add(`status-${newStatus.toLowerCase()}`);
+            }
+        })
+        .catch(error => console.error('Error updating status:', error));
+    }
+
+    // Add event listeners to all status selects
+    document.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('change', handleStatusChange);
+    });
 });
 </script>
 {% endif %}
