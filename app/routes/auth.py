@@ -48,7 +48,7 @@ def login():
         if user and user.check_password(request.form['password']):
             login_user(user)
             return redirect(url_for('jobs.index'))
-        flash('Invalid username or password')
+        flash('Invalid username or password', 'error')  # Add error category
     return render_template('auth/login.html')
 
 @bp.route('/logout')
