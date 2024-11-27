@@ -40,3 +40,7 @@ build/
 
 # Jupyter Notebook temporary files
 .ipynb_checkpoints/
+
+# Bug reports
+app/bug_reports/
+*.json
