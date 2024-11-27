@@ -3,6 +3,10 @@
 {% block content %}
 <div class="container">
     <h1 class="page-title">Report a Bug</h1>
+    {% if remaining_reports > 0 %}
+    <div class="bug-limit-info {% if remaining_reports < (bug_limit // 4) %}warning{% endif %}">
+        Remaining bug reports today: {{ remaining_reports }}/{{ bug_limit }}
+    </div>
     <form method="post" class="bug-form">
         <input type="hidden" name="current_url" value="{{ request.url }}">
         <label>
@@ -15,9 +19,14 @@
             Description:
             <textarea name="description" required
                       placeholder="What happened? What did you expect to happen? Steps to reproduce?"
-                      rows="5"></textarea>
+                      rows="6"></textarea>
         </label>
         <button type="submit" class="btn-primary">Submit Bug Report</button>
     </form>
+    {% else %}
+    <div class="flash error">
+        You have reached the daily limit of {{ bug_limit }} bug reports. Please try again tomorrow.
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
